@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_shared_links",
+  "info": {
+    "displayName": "link",
+    "icon": "attachment",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "is_external": {
+      "type": "boolean",
+      "default": false
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "is_button": {
+      "type": "boolean",
+      "default": false
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "button_variant": {
+      "type": "enumeration",
+      "enum": [
+        "primary",
+        "secondary",
+        "ghost",
+        "muted"
+      ]
+    }
+  }
+}

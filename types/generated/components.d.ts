@@ -1,5 +1,23 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SharedLink extends Struct.ComponentSchema {
+  collectionName: 'components_shared_links';
+  info: {
+    description: '';
+    displayName: 'link';
+    icon: 'attachment';
+  };
+  attributes: {
+    button_variant: Schema.Attribute.Enumeration<
+      ['primary', 'secondary', 'ghost', 'muted']
+    >;
+    href: Schema.Attribute.String & Schema.Attribute.Required;
+    is_button: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    is_external: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -65,6 +83,7 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'shared.link': SharedLink;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;

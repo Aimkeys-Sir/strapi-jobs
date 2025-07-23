@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "singularName": "post",
+    "pluralName": "posts",
+    "displayName": "post",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "salary_2": {
+      "type": "biginteger"
+    },
+    "salary_1": {
+      "type": "biginteger"
+    },
+    "job_description": {
+      "type": "richtext"
+    },
+    "recruiter_email": {
+      "type": "email"
+    },
+    "recruiter_name": {
+      "type": "string"
+    },
+    "opened_at": {
+      "type": "datetime"
+    },
+    "deadline_at": {
+      "type": "datetime"
+    },
+    "job_type": {
+      "type": "enumeration",
+      "enum": [
+        "FULL_TIME",
+        "PART_TIME",
+        "FREELANCE"
+      ]
+    },
+    "work_model": {
+      "type": "enumeration",
+      "enum": [
+        "ON_SITE",
+        "REMOTE",
+        "HYBRID"
+      ]
+    },
+    "industry": {
+      "type": "enumeration",
+      "enum": [
+        "IT",
+        "BEAUTY_AND_COSMETICS"
+      ]
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "posts"
+    },
+    "currency": {
+      "type": "enumeration",
+      "enum": [
+        "KSH",
+        "USD",
+        "EUR"
+      ],
+      "default": "KSH"
+    }
+  }
+}
