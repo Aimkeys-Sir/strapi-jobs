@@ -455,6 +455,9 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     deadline_at: Schema.Attribute.DateTime;
     industry: Schema.Attribute.Enumeration<['IT', 'BEAUTY_AND_COSMETICS']>;
     job_description: Schema.Attribute.RichText;
+    job_level: Schema.Attribute.Enumeration<
+      ['INTERNSHIP', 'ENTRY_LEVEL', 'MID_SENIOR_LEVEL', 'SENIOR_LEVEL']
+    >;
     job_type: Schema.Attribute.Enumeration<
       ['FULL_TIME', 'PART_TIME', 'FREELANCE']
     >;
@@ -463,6 +466,10 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     opened_at: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
+    recruiter: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::recruiter.recruiter'
+    >;
     recruiter_email: Schema.Attribute.Email;
     recruiter_name: Schema.Attribute.String;
     salary_1: Schema.Attribute.BigInteger;
@@ -472,6 +479,45 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     work_model: Schema.Attribute.Enumeration<['ON_SITE', 'REMOTE', 'HYBRID']>;
+  };
+}
+
+export interface ApiRecruiterRecruiter extends Struct.CollectionTypeSchema {
+  collectionName: 'recruiters';
+  info: {
+    description: '';
+    displayName: 'recruiter';
+    pluralName: 'recruiters';
+    singularName: 'recruiter';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.String;
+    first_name: Schema.Attribute.String;
+    job_title: Schema.Attribute.String;
+    last_name: Schema.Attribute.String;
+    links: Schema.Attribute.Component<'shared.link', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::recruiter.recruiter'
+    > &
+      Schema.Attribute.Private;
+    phone_number: Schema.Attribute.String;
+    posts: Schema.Attribute.Relation<'oneToMany', 'api::post.post'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -987,6 +1033,7 @@ declare module '@strapi/strapi' {
       'api::company.company': ApiCompanyCompany;
       'api::global.global': ApiGlobalGlobal;
       'api::post.post': ApiPostPost;
+      'api::recruiter.recruiter': ApiRecruiterRecruiter;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

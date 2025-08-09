@@ -73,6 +73,21 @@
         "EUR"
       ],
       "default": "KSH"
+    },
+    "job_level": {
+      "type": "enumeration",
+      "enum": [
+        "INTERNSHIP",
+        "ENTRY_LEVEL",
+        "MID_SENIOR_LEVEL",
+        "SENIOR_LEVEL"
+      ]
+    },
+    "recruiter": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::recruiter.recruiter",
+      "inversedBy": "posts"
     }
   }
 }
