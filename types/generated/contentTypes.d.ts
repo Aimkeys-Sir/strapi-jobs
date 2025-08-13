@@ -458,6 +458,8 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     job_level: Schema.Attribute.Enumeration<
       ['INTERNSHIP', 'ENTRY_LEVEL', 'MID_SENIOR_LEVEL', 'SENIOR_LEVEL']
     >;
+    job_link: Schema.Attribute.Component<'shared.link', false> &
+      Schema.Attribute.Required;
     job_type: Schema.Attribute.Enumeration<
       ['FULL_TIME', 'PART_TIME', 'FREELANCE']
     >;
